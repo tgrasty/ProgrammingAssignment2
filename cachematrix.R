@@ -4,12 +4,27 @@
 ## Write a short comment describing this function
 
 makeCacheMatrix <- function(x = matrix()) {
-
+    inverse<-solve(x)
+    retornar<<-list(matrix=x,inverse=inverse)
 }
 
 
 ## Write a short comment describing this function
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+    if(!exists("retornar")){
+        result<-makeCacheMatrix(x)$inverse
+        result
+    }
+    else
+        if(!all(dim(retornar$matrix)==dim(x))) {
+            result<-makeCacheMatrix(x)$inverse
+            result
+        }
+    else 
+        if(!all(retornar$matrix==x)){
+            result<-makeCacheMatrix(x)$inverse
+            result
+        }  
+    else retornar$inverse
 }
